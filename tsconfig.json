@@ -9,6 +9,6 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["*.ts", "**/*.ts"],
+  "include": ["*.ts", "**/*.ts", "./**/*.ts"],
   "exclude": ["node_modules", "dist"]
 }
