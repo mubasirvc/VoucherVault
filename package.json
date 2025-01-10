@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && npx tailwindcss -i ./public/styles/tailwind.css -o ./public/styles/output.css",
     "start": "node dist/app.js",
     "dev": "nodemon --watch . --ext ts --exec node --loader ts-node/esm ./app.ts"
   },
@@ -24,7 +24,10 @@
     "@types/express": "^5.0.0",
     "@types/morgan": "^1.9.9",
     "@types/node": "^22.10.5",
+    "autoprefixer": "^10.4.20",
     "nodemon": "^3.1.9",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
   }

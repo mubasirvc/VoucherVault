@@ -1,8 +1,10 @@
-import express, { Request, Response } from 'express';
+import express from "express";
+import { getDashboard, getLogin, postLogin } from "../controllers/authController.ts";
+
 const router = express.Router();
 
-router.get('/', (req: Request, res: Response) => {
-  res.render('index', { title: 'welcome to Auxwall' });
-});
+router.get("/", getLogin);
+router.post("/login", postLogin);
+router.get("/dashboard", getDashboard);
 
 export default router;
