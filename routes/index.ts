@@ -1,10 +1,12 @@
 import express from "express";
-import { getDashboard, getLogin, postLogin } from "../controllers/authController.ts";
+import { getDashboard, getLogin, logout, postLogin } from "../controllers/authController.ts";
+import { noCache, requireAuth } from "../middlewares/authmiddleware.ts";
 
 const router = express.Router();
 
 router.get("/", getLogin);
 router.post("/login", postLogin);
-router.get("/dashboard", getDashboard);
+router.get("/dashboard", requireAuth, noCache, getDashboard);
+router.get("/logout", logout);
 
 export default router;

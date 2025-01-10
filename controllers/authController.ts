@@ -18,6 +18,7 @@ export const postLogin = (req: Request, res: Response): void => {
     const { username, password } = req.body;
 
     if (validateCredentials(username, password)) {
+      (req.session as any).user = username;
       res.redirect("/dashboard");
       return;
     }
@@ -35,6 +36,20 @@ export const postLogin = (req: Request, res: Response): void => {
 };
 
 export const getDashboard = (req: Request, res: Response): void => {
-  res.render("dashboard", { username: '' });
-  return
+  const username = (req.session as any).user
+  res.render("dashboard", { username});
+  return;
+};
+
+
+export const logout = (req: Request, res: Response): void => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error("Error destroying session:", err);
+      res.status(500).send("Failed to log out.");
+      return;
+    }
+    res.clearCookie("connect.sid");
+    res.redirect("/");
+  });
 };

@@ -7,8 +7,18 @@ import logger from 'morgan';
 import http from 'http';
 import 'dotenv/config';
 import indexRouter from './routes/index.ts';
+import session from "express-session";
 
 const app = express();
+
+app.use(
+  session({
+    secret: "keyboard_cat",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }, // Set to `true` only if using HTTPS
+  })
+);
 
 // Resolve __dirname in ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -16,7 +26,6 @@ const __dirname = path.dirname(__filename);
 
 // Set the views directory
 const viewsPath = path.resolve(__dirname, 'views');
-console.log('Resolved Views directory:', viewsPath, 'pathh');
 app.set('views', viewsPath);
 app.set('view engine', 'ejs');
 
