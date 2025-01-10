@@ -8,6 +8,8 @@ import http from 'http';
 import 'dotenv/config';
 import indexRouter from './routes/index.ts';
 import session from "express-session";
+import expressLayouts from 'express-ejs-layouts';
+
 
 const app = express();
 
@@ -28,6 +30,11 @@ const __dirname = path.dirname(__filename);
 const viewsPath = path.resolve(__dirname, 'views');
 app.set('views', viewsPath);
 app.set('view engine', 'ejs');
+
+app.use(expressLayouts);
+
+// Set the default layout file
+app.set('layout', 'layouts/main');
 
 // Middleware setup
 app.use(logger('dev'));
