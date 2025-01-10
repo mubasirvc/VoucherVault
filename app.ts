@@ -13,10 +13,10 @@ const app = express();
 
 app.use(
   session({
-    secret: "keyboard_cat",
+    secret: process.env.SESSION_SECRET!,
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false }, // Set to `true` only if using HTTPS
+    cookie: { secure: false },
   })
 );
 
