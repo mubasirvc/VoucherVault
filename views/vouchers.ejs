@@ -7,15 +7,13 @@
     <!-- Sidebar Content -->
     <div class="p-4 space-y-4">
       <!-- Dashboard Title -->
-      <h1 class="text-xl font-semibold text-white border-b pb-3">
-        Dashboard
-      </h1>
+      <h1 class="text-xl font-semibold text-white border-b pb-3">Dashboard</h1>
 
       <!-- Navigation Links -->
       <ul class="space-y-3">
         <li>
           <a
-            href="/dashboard"
+            href="/home"
             class="flex items-center p-2 rounded-lg hover:bg-indigo-600 hover:text-white transition duration-200 ease-in-out"
           >
             <svg
@@ -36,7 +34,7 @@
         <li>
           <a
             href="/vouchers"
-            class="flex items-center p-2 rounded-lg hover:bg-indigo-600 hover:text-white transition duration-200 ease-in-out"
+            class="flex items-center p-2 rounded-lg bg-indigo-600 hover:text-white transition duration-200 ease-in-out"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -107,9 +105,9 @@
   </div>
 
   <!-- Content -->
-  <div class="flex-1 flex flex-col overflow-hidden">
+  <div class="flex-1 flex flex-col overflow-auto">
     <!-- Navbar -->
-    <div class="bg-white shadow min-h-14">
+    <div class="bg-white shadow min-h-14 border-b">
       <div class="container mx-auto">
         <div class="flex justify-between items-center py-4 px-2">
           <h1 class="text-xl font-semibold"></h1>
@@ -135,9 +133,73 @@
         </div>
       </div>
     </div>
+
     <!-- Content Body -->
-    <div class="flex-1 overflow-auto p-4"></div>
+    <div class="max-w-md p-5 ml-auto mr-8">
+      <h1 class="text-3xl font-normal mb-4 mt-6">Create new voucher</h1>
+      <form action="/vouchers" method="post">
+        <label for="date">Select a expiry date</label>
+        <div class="flex gap-3">
+          <input
+            required
+            id="date"
+            type="datetime-local"
+            name="expiryDate"
+            placeholder="date time"
+            class="flex px-3 py-2 md:px-4 md:py-3 border-2 border-black rounded-lg font-medium placeholder:font-normal"
+          />
+          <button
+            type="submit"
+            class="inline-flex items-center rounded-md border border-transparent bg-gray-800 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-gray-900"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Add overflow-y-auto to make this section scrollable -->
+    <div>
+      <h1 class="text-4xl font-normal mb-6 mt-10 text-center">
+        List of Vouchers
+      </h1>
+
+      <div
+        class="p-4 flex flex-wrap justify-center gap-4 max-w-full overflow-y-auto"
+        style="max-height: 80vh"
+      >
+        <% vouchers.forEach(function(voucher) { %>
+        <a
+          class="flex flex-col items-center p-4 border border-indigo-300 rounded-2xl hover:shadow-xl hover:shadow-indigo-50"
+          href="#"
+          style="width: 280px; box-sizing: border-box"
+        >
+          <img
+            src="<%= voucher.qrCode %>"
+            alt="QR Code"
+            class="shadow rounded-lg overflow-hidden border w-full"
+          />
+          <div class="mt-4 text-center">
+            <h4 class="font-bold text-xl">Voucher Code: <%= voucher.code %></h4>
+            <p class="mt-2 text-gray-600">
+              Generated At: <%= voucher.generatedAt.toLocaleString() %>
+            </p>
+            <p class="mt-2 text-gray-600">
+              Expiry Date: <%= voucher.expiryDate.toLocaleString() %>
+            </p>
+            <div class="mt-5">
+              <button
+                type="button"
+                class="inline-flex items-center rounded-md border border-transparent bg-gray-800 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-gray-900"
+              >
+                Start Creating
+              </button>
+            </div>
+          </div>
+        </a>
+
+        <% }) %>
+      </div>
+    </div>
   </div>
 </div>
-
-<script src="/javascripts/index.js"></script>

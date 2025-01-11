@@ -11,5 +11,8 @@ router.get("/dashboard", requireAuth, noCache, getDashboard);
 router.get("/logout", logout);
 router.post("/vouchers", generateVoucher);
 router.get("/vouchers", listVouchers);
+router.get("/success", getSuccessPage);
+router.get("/home", getHomePage);
+router.get("/settings", getSettingsPage);
 
 export default router;
