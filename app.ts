@@ -7,8 +7,19 @@ import logger from 'morgan';
 import http from 'http';
 import 'dotenv/config';
 import indexRouter from './routes/index.ts';
-
+import session from "express-session";
+import expressLayouts from 'express-ejs-layouts';
+import AppDataSource from './config/data-source.ts';
 const app = express();
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET!,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false },
+  })
+);
 
 // Resolve __dirname in ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -16,9 +27,13 @@ const __dirname = path.dirname(__filename);
 
 // Set the views directory
 const viewsPath = path.resolve(__dirname, 'views');
-console.log('Resolved Views directory:', viewsPath, 'pathh');
 app.set('views', viewsPath);
 app.set('view engine', 'ejs');
+
+app.use(expressLayouts);
+
+// Set the default layout file
+app.set('layout', 'layouts/main');
 
 // Middleware setup
 app.use(logger('dev'));
@@ -26,6 +41,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+AppDataSource.initialize()
+  .then(() => {
+    console.log("DataSource has been initialized!");
+  })
+  .catch((error) => {
+    console.error("Error during DataSource initialization:", error);
+  });
 
 // Routes
 app.use('/', indexRouter);
