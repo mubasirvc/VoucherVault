@@ -1,7 +1,8 @@
 import express from "express";
 import { getDashboard, getLogin, logout, postLogin } from "../controllers/authController.ts";
 import { noCache, requireAuth } from "../middlewares/authmiddleware.ts";
-import { generateVoucher, getHomePage, getSettingsPage, getSuccessPage, listVouchers } from "../controllers/voucherController.ts";
+import { generateVoucher, getHomePage, getSuccessPage, listVouchers } from "../controllers/voucherController.ts";
+import { getSettingsPage, updateSettings } from "../controllers/settingsController.ts";
 
 const router = express.Router();
 
@@ -14,5 +15,6 @@ router.get("/vouchers", listVouchers);
 router.get("/success", getSuccessPage);
 router.get("/home", getHomePage);
 router.get("/settings", getSettingsPage);
+router.post("/settings", updateSettings);
 
 export default router;

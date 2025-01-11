@@ -37,7 +37,7 @@ export const postLogin = (req: Request, res: Response): void => {
 
 export const getDashboard = (req: Request, res: Response): void => {
   const username = (req.session as any).user
-  res.render("dashboard", { username});
+  res.render("home", { username});
   return;
 };
 

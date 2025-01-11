@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-@Entity() // Ensure this decorator is present
+@Entity()
 export class Voucher {
   @PrimaryGeneratedColumn()
   id: number;
