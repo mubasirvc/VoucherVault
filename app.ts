@@ -9,8 +9,7 @@ import 'dotenv/config';
 import indexRouter from './routes/index.ts';
 import session from "express-session";
 import expressLayouts from 'express-ejs-layouts';
-
-
+import AppDataSource from './config/data-source.ts';
 const app = express();
 
 app.use(
@@ -42,6 +41,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+AppDataSource.initialize()
+  .then(() => {
+    console.log("DataSource has been initialized!");
+  })
+  .catch((error) => {
+    console.error("Error during DataSource initialization:", error);
+  });
 
 // Routes
 app.use('/', indexRouter);
