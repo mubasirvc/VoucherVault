@@ -49,19 +49,10 @@ VoucherVault is a powerful yet simple application for creating and managing vouc
    cd VoucherVault
 
 2. Setup environment variables:
-   Create a .env file in the root directory with the following:
-   ```bash
+   `cp .env.example .env`
    
-   PORT = 4004
-   SESSION_SECRET = <your-session-secret-key>
-   LOGIN_PASSWORD = <your-login-password>
-   LOGIN_USERNAME = <your-login-username>
-   MYSQL_HOST = <your-mysql-host>
-   MYSQL_USER = <your-mysql-user>
-   MYSQL_DB = <your-mysql-db>
-   MYSQL_PASSWORD = <your-mysql-password>
-   MYSQL_PORT = <your-mysql-port>
-   NODE_ENV = 
+2. Setup environment variables:
+   Create a .env file in the root directory with the following:
 
 4. Install dependencies:  
    ```bash
