@@ -45,7 +45,7 @@ VoucherVault is a powerful yet simple application for creating and managing vouc
 
 1. Clone the repository:  
    ```bash
-   git clone 
+   git clone https://github.com/mubasirvc/VoucherVault.git
    cd VoucherVault
 
 2. Setup environment variables:
