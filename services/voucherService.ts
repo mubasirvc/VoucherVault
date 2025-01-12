@@ -28,3 +28,14 @@ export const getAllVouchers = async (): Promise<Voucher[]> => {
   const voucherRepository = AppDataSource.getRepository(Voucher);
   return await voucherRepository.find();
 };
+
+// Service to get single voucher
+export const getSingleVoucher = async (id: string): Promise<Voucher | null> => {
+  const voucherRepository = AppDataSource.getRepository(Voucher);
+
+  const voucher = await voucherRepository.findOne({
+    where: { id: parseInt(id) },
+  });
+
+  return voucher;
+};
