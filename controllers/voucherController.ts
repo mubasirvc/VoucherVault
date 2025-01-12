@@ -13,15 +13,24 @@ export const generateVoucher = async (
 ): Promise<void> => {
   try {
     const { expiryDate } = req.body;
-    if (!expiryDate) {
-      res.status(400).json({ message: "Expiry date is required" });
+
+    const expiry = new Date(expiryDate);
+
+    const now = new Date();
+    if (expiry <= now || !expiryDate) {
+      const vouchers = await getAllVouchers();
+      res.render("vouchers", {
+        vouchers,
+        error: "Expiry date must be in the future",
+      });
       return;
     }
 
-    const voucher = await createVoucher(new Date(expiryDate));
+    await createVoucher(expiry);
 
     res.redirect("/success");
   } catch (error) {
+    console.error("Error generating voucher:", error);
     res.status(500).json({ message: "Error generating voucher", error });
   }
 };
@@ -32,7 +41,7 @@ export const listVouchers = async (
 ): Promise<void> => {
   try {
     const vouchers = await getAllVouchers();
-    res.render("vouchers", { vouchers });
+    res.render("vouchers", { vouchers, error: "" });
   } catch (error) {
     res.status(500).json({ message: "Error fetching vouchers", error });
   }
@@ -118,10 +127,7 @@ export const generateVoucherPdf = async (
     const pdfData = doc.output("arraybuffer");
 
     res.setHeader("Content-Type", "application/pdf");
-    res.setHeader(
-      "Content-Disposition",
-      `inline; filename="voucher.pdf"`
-    );
+    res.setHeader("Content-Disposition", `inline; filename="voucher.pdf"`);
 
     res.send(Buffer.from(pdfData));
   } catch (error) {
