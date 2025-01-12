@@ -7,8 +7,7 @@ export const getLogin = (req: Request, res: Response) => {
     title: "Login",
     formAction: "/login",
     username: "",
-    errorEmail: false,
-    errorMessage: null,
+    errorMessage: '',
   });
 };
 
@@ -19,7 +18,7 @@ export const postLogin = (req: Request, res: Response): void => {
 
     if (validateCredentials(username, password)) {
       (req.session as any).user = username;
-      res.redirect("/dashboard");
+      res.redirect("/home");
       return;
     }
 
@@ -27,7 +26,6 @@ export const postLogin = (req: Request, res: Response): void => {
       title: "Login",
       formAction: "/login",
       username,
-      errorEmail: true,
       errorMessage: "Invalid username or password",
     });
   } catch (error) {

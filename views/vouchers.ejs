@@ -172,7 +172,7 @@
         <a
           class="flex flex-col items-center p-4 border border-indigo-300 rounded-2xl hover:shadow-xl hover:shadow-indigo-50"
           href="#"
-          style="width: 280px; box-sizing: border-box"
+          style="width: 250px; box-sizing: border-box"
         >
           <img
             src="<%= voucher.qrCode %>"
@@ -180,26 +180,31 @@
             class="shadow rounded-lg overflow-hidden border w-full"
           />
           <div class="mt-4 text-center">
-            <h4 class="font-bold text-xl">Voucher Code: <%= voucher.code %></h4>
+            <h4 class="font-bold text-lg">Voucher Code: <%= voucher.code %></h4>
             <p class="mt-2 text-gray-600">
               Generated At: <%= voucher.generatedAt.toLocaleString() %>
             </p>
             <p class="mt-2 text-gray-600">
               Expiry Date: <%= voucher.expiryDate.toLocaleString() %>
             </p>
-            <div class="mt-5">
-              <button
-                type="button"
-                class="inline-flex items-center rounded-md border border-transparent bg-gray-800 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-gray-900"
-              >
-                Start Creating
-              </button>
-            </div>
+            <button
+              type="button"
+              class="mt-2 inline-flex items-center rounded-md border border-transparent bg-gray-800 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-gray-900"
+              onclick="previewVoucherPdf('<%= voucher.id %>')"
+            >
+              View as PDF
+            </button>
           </div>
         </a>
-
         <% }) %>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  function previewVoucherPdf(voucherId) {
+    const url = `/voucher/generate_pdf/${voucherId}`;
+    window.open(url, "_blank");
+  }
+</script>
