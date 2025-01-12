@@ -82,19 +82,16 @@ VoucherVault is a powerful yet simple application for creating and managing vouc
 ## **Screenshots**
 
 1. **Login Page**  
-   ![Landing Page](/)
+   ![Login Page](/public/images/login.png)
 
 2. **Landing Page** 
-*Select a product and view its details or add it to your wishlist.*   
-   ![Landing Page](/)
+   ![Landing Page](/public/images/landing.png)
 
 3. **Vouchers Page** 
-*View cart details.*   
-   ![Landing Page](/)
+   ![Voucher Page](/public/images/vouchers.png)
    
 4. **Settings Page** 
-*Select or add an address, choose a payment mode, and place the order*   
-   ![Landing Page](/)
+   ![Settings Page](/public/images/settings.png)
 
 ``
 
