@@ -10,6 +10,7 @@ import indexRouter from './routes/index.ts';
 import session from "express-session";
 import expressLayouts from 'express-ejs-layouts';
 import AppDataSource from './config/data-source.ts';
+
 const app = express();
 
 app.use(
@@ -55,7 +56,7 @@ app.use('/', indexRouter);
 
 // Catch 404 and forward to error handler
 app.use((req: Request, res: Response, next: NextFunction) => {
-  next(createError(404));
+  next(res.render('404'));
 });
 
 // Error handler

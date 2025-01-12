@@ -20,7 +20,6 @@ export const updateSettings = async (
       voucherWidth,
       titleSize,
     });
-console.log(errors);
 
     if (Object.keys(errors).length > 0) {
       res.render("settings", {
@@ -61,10 +60,9 @@ export const getSettingsPage = async (
   res: Response
 ): Promise<void> => {
   const settings = await getSettings();
-  console.log(settings[0], "settingsss");
 
   res.render("settings", {
-    data: settings[0],
+    data: settings[0] || {},
     errors: {},
     success: ''
   });
