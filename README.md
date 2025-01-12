@@ -76,7 +76,7 @@ VoucherVault is a powerful yet simple application for creating and managing vouc
 ## **Dummy Accounts**
   
 ### **User**
-- **Email**: `admin123`  
+- **Username**: `admin123`  
 - **Password**: `password123`
 
 ## **Screenshots**
